@@ -1,0 +1,1 @@
+python tools/train.py --config configs/deeplabv3/deeplabv3_r50-d8_480x480_1k_LeafDataset.py

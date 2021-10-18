@@ -1,0 +1,50 @@
+{
+    "script": "tools/train.py",
+    "arguments": [],
+    "framework": "Python",
+    "communicator": "None",
+    "target": "Hexaleaf",
+    "environment": {
+        "name": "AzureML-pytorch-1.7-ubuntu18.04-py37-cuda11-gpu",
+        "version": "14",
+        "python": {
+            "interpreterPath": "python",
+            "userManagedDependencies": true,
+            "condaDependencies": null,
+            "baseCondaEnvironment": null
+        },
+        "environmentVariables": {
+            "EXAMPLE_ENV_VAR": "EXAMPLE_VALUE"
+        },
+        "docker": {
+            "baseImage": null,
+            "platform": {
+                "os": "Linux",
+                "architecture": "amd64"
+            },
+            "baseDockerfile": "FROM mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.0.3-cudnn8-ubuntu18.04:20211012.v1\n\nENV AZUREML_CONDA_ENVIRONMENT_PATH /azureml-envs/pytorch-1.7\n\n# Create conda environment\nRUN conda create -p $AZUREML_CONDA_ENVIRONMENT_PATH \\\n    python=3.7 \\\n    pip=20.2.4 \\\n    pytorch=1.7.1 \\\n    torchvision=0.8.2 \\\n    torchaudio=0.7.2 \\\n    cudatoolkit=11.0 \\\n    nvidia-apex=0.1.0 \\\n    -c anaconda -c pytorch -c conda-forge\n\n# Prepend path to AzureML conda environment\nENV PATH $AZUREML_CONDA_ENVIRONMENT_PATH/bin:$PATH\n\n# Install pip dependencies\nRUN HOROVOD_WITH_PYTORCH=1 \\\n    pip install 'matplotlib>=3.3,<3.4' \\\n                'psutil>=5.8,<5.9' \\\n                'tqdm>=4.59,<4.60' \\\n                'pandas>=1.1,<1.2' \\\n                'scipy>=1.5,<1.6' \\\n                'numpy>=1.10,<1.20' \\\n                'ipykernel~=6.0' \\\n                'azureml-core==1.35.0' \\\n                'azureml-defaults==1.35.0' \\\n                'azureml-mlflow==1.35.0' \\\n                'azureml-telemetry==1.35.0' \\\n                'tensorboard==2.4.0' \\\n                'tensorflow-gpu==2.4.1' \\\n                'onnxruntime-gpu>=1.7,<1.8' \\\n                'horovod[pytorch]==0.21.3' \\\n                'future==0.17.1'\n\n# This is needed for mpi to locate libpython\nENV LD_LIBRARY_PATH $AZUREML_CONDA_ENVIRONMENT_PATH/lib:$LD_LIBRARY_PATH\n",
+            "baseImageRegistry": {
+                "address": null,
+                "username": null,
+                "password": null
+            },
+            "enabled": false,
+            "arguments": []
+        },
+        "spark": {
+            "repositories": [],
+            "packages": [],
+            "precachePackages": true
+        },
+        "configUri": "/subscriptions/dfc1bdc8-c35c-4e7f-ae62-7e8553e4f353/resourceGroups/Hexa_resource/providers/Microsoft.MachineLearningServices/workspaces/Hexafarms_Leaf/environments/AzureML-pytorch-1.7-ubuntu18.04-py37-cuda11-gpu/versions/14"
+    },
+    "history": {
+        "outputCollection": true,
+        "directoriesToWatch": [
+            "logs"
+        ]
+    },
+    "docker": {
+        "useDocker": true
+    }
+}
