@@ -1,43 +1,33 @@
-from azureml.core import ScriptRunConfig, Experiment, Workspace, Environment
+from azureml.core import ScriptRunConfig, Experiment, Workspace, Environment, Dataset, Run
 
 workspace = Workspace.from_config()
 workspace.get_details()
 
-# create or load an experiment
 experiment = Experiment(workspace, 'Hexafarms_leaf')
-# create or retrieve a compute target
 cluster = workspace.compute_targets['Hexaleaf']
 
-'''
-mmsegmentation이 설치가 안되있다 현재 docker images는 ...
-'''
-
-# env = Environment.from_existing_conda_environment(name="Hexa_env",
-#                                                     conda_environment_name="mmplant")
-
-# env = Environment.from_conda_specification(name="Hexa_env", file_path="environment.yml")
-# env = Environment.from_pip_requirements(name="Hexa_env", file_path="requirements.txt")
+dataset = Dataset.get_by_name(workspace, name='Leaf-Segmentation')
 
 
-''' Use Docker image'''
-env = Environment.from_docker_image(name="Hexa_env", image="ccomkhj/mmplant2:v3", container_registry=None, conda_specification=None, pip_requirements=None)
 
-# # create or retrieve an environment
-# env = Environment.get(workspace=workspace, name='fastai')
-# # configure and submit your training 3
-# config = ScriptRunConfig(source_directory='.',
-#                     command=['ls', '-l'],
-#                     compute_target=cluster,
-#                     environment=env)
+env = Environment.from_docker_image(name="Hexa_env", image="ccomkhj/mmplant5:v1", container_registry=None, conda_specification=None, pip_requirements=None)
 
-src = ScriptRunConfig(source_directory="tools",
-                      script='train.py',
+src = ScriptRunConfig(source_directory=".",
+                      script='tools/train.py',
                       compute_target="Hexaleaf",
-                      environment=env)
-
-# Set compute target
-# # Skip this if you are running on your local computer
-# script_run_config.run_config.target = my_compute_target
+                      environment=env,
+                      arguments=[
+                        '--config', "configs/deeplabv3/deeplabv3_r50-d8_480x480_1k_LeafDataset.py",
+                        '--data_path', "data/LCCV",
+                       ],
+                      )
 
 run = experiment.submit(config=src)
 run.wait_for_completion(show_output=True)
+
+'''
+가능한문제 원인
+1. 폴더가 업로드 되지 않고 있다. (근데 왠지 폴더 업로드는 문제가 없을 것 같다...)
+2. /와 \의 혼동으로 인한 문제
+3. https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data?view=azure-ml-py
+'''

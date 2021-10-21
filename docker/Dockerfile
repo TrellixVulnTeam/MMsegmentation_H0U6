@@ -22,8 +22,9 @@ ARG MMCV
 RUN ["/bin/bash", "-c", "pip install mmcv-full==${MMCV} -f https://download.openmmlab.com/mmcv/dist/cu${CUDA//./}/torch${PYTORCH}/index.html"]
 
 # Install MMSegmentation
-RUN git clone https://github.com/open-mmlab/mmsegmentation.git /mmsegmentation
+RUN git clone https://github.com/HexaFarms/MMsegmentation.git /mmsegmentation
 WORKDIR /mmsegmentation
 ENV FORCE_CUDA="1"
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-RUN pip install --no-cache-dir -e .
+# RUN pip install --no-cache-dir -e .

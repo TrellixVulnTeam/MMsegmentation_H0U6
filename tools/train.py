@@ -56,6 +56,17 @@ def parse_args():
         default='none',
         help='job launcher')
     parser.add_argument('--local_rank', type=int, default=0)
+
+    parser.add_argument(
+        '--data_path',
+        type=str,
+        default=None,
+        help='Path to the training data'
+    )
+    
+
+
+
     args = parser.parse_args()
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)
@@ -139,6 +150,7 @@ def main():
         test_cfg=cfg.get('test_cfg'))
     model.init_weights()
 
+
     # SyncBN is not support for DP
     if not distributed:
         warnings.warn(
@@ -148,6 +160,20 @@ def main():
         model = revert_sync_batchnorm(model)
 
     logger.info(model)
+
+
+    if args.data_path == True: # needs to be changed.
+        from azureml.core import Workspace, Dataset
+        # The download location can be retrieved from argument values
+        # import sys
+        # download_location = sys.argv[1]
+
+        # The download location can also be retrieved from input_datasets of the run context.
+        workspace = Workspace(subscription_id="dfc1bdc8-c35c-4e7f-ae62-7e8553e4f353", resource_group="Hexa_resource", workspace_name="Hexafarms_Leaf", _cloud='AzureCloud')
+        workspace.get_details()
+
+        dataset = Dataset.get_by_name(workspace, name='Leaf-Segmentation')
+        dataset.download(args.data_path)
 
     datasets = [build_dataset(cfg.data.train)]
     if len(cfg.workflow) == 2:
