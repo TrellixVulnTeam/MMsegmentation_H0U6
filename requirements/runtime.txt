@@ -3,3 +3,4 @@ numpy
 packaging
 prettytable
 azureml
+azureml-core
