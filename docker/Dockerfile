@@ -26,5 +26,7 @@ RUN git clone https://github.com/HexaFarms/MMsegmentation.git /mmsegmentation
 WORKDIR /mmsegmentation
 ENV FORCE_CUDA="1"
 RUN pip install --upgrade pip
+RUN pip install rasa --ignore-installed ruamel.yaml
 RUN pip install -r requirements.txt
+RUN pip install azureml-dataset-runtime --upgrade
 # RUN pip install --no-cache-dir -e .

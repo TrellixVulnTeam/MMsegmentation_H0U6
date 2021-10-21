@@ -10,7 +10,7 @@ dataset = Dataset.get_by_name(workspace, name='Leaf-Segmentation')
 
 
 
-env = Environment.from_docker_image(name="Hexa_env", image="ccomkhj/mmplant5:v2", container_registry=None, conda_specification=None, pip_requirements=None)
+env = Environment.from_docker_image(name="Hexa_env", image="ccomkhj/mmplant5:v5", container_registry=None, conda_specification=None, pip_requirements=None)
 
 src = ScriptRunConfig(source_directory=".",
                       script='tools/train.py',
