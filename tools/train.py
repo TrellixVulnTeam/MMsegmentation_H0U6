@@ -58,7 +58,7 @@ def parse_args():
     parser.add_argument('--local_rank', type=int, default=0)
 
     parser.add_argument(
-        '--data_path',
+        '--datapath',
         type=str,
         default=None,
         help='Path to the training data'
@@ -162,18 +162,23 @@ def main():
     logger.info(model)
 
 
-    if args.data_path == True: # needs to be changed.
-        from azureml.core import Workspace, Dataset
-        # The download location can be retrieved from argument values
-        # import sys
-        # download_location = sys.argv[1]
+    if args.datapath != None: # needs to be changed.
+        from azureml.core import Workspace, Run, Dataset
 
         # The download location can also be retrieved from input_datasets of the run context.
         workspace = Workspace(subscription_id="dfc1bdc8-c35c-4e7f-ae62-7e8553e4f353", resource_group="Hexa_resource", workspace_name="Hexafarms_Leaf", _cloud='AzureCloud')
         workspace.get_details()
 
         dataset = Dataset.get_by_name(workspace, name='Leaf-Segmentation')
-        dataset.download(args.data_path)
+        run = Run.get_context()
+        
+        import os
+        script_folder = os.path.join ( os.getcwd(), args.datapath )
+        os.makedirs( script_folder, exist_ok=True)
+
+        dataset.download(args.datapath)
+        # dataset.mount(args.data_path)
+        run.log('path', script_folder)
 
     datasets = [build_dataset(cfg.data.train)]
     if len(cfg.workflow) == 2:
