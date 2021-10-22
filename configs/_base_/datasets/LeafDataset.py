@@ -9,7 +9,7 @@ train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations'),
     # dict(type='Resize', img_scale=img_scale, ratio_range=(0.5, 2.0)),
-    dict(type='RandomCrop', crop_size=crop_size, cat_max_ratio=0.3),
+    dict(type='RandomCrop', crop_size=crop_size, cat_max_ratio=0.9),
     dict(type='RandomRotate', prob=0.5,
                  degree=45,
                  pad_val=0,
