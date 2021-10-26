@@ -1,4 +1,3 @@
-docker build --tag mmplant --file docker\Dockerfile .
-docker login -u ccomkhj
-docker tag mmplant:latest ccomkhj/mmplant2:v1
-docker push ccomkhj/mmplant:v1
+@REM docker build --tag mmplant6 --file docker/Dockerfile .
+docker run -w=/Users/samsung_/Hexafarms/Leaf_Area/ -it -v C:/Users/samsung_/Hexafarms/Leaf_Area/mmsegmentation/:/work mmplant6 sh ^
+-c "pip install --no-cache-dir -e . ; python3 tools/test.py work_dirs/Hexa_Model/DeeplabV3_10k/deeplabv3plus_r50-d8_480x480_10k_LeafDataset.py work_dirs/Hexa_Model/DeeplabV3_10k/iter_10000.pth --show-dir work_dirs/deeplabv3plus_r50-d8_480x480_10k_LeafDataset"

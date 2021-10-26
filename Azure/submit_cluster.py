@@ -13,9 +13,12 @@ src = ScriptRunConfig(source_directory=".",
                       compute_target="Hexaleaf",
                       environment=env,
                       arguments=[
-                        '--config', "configs/deeplabv3plus/deeplabv3plus_r50-d8_480x480_1k_LeafDataset.py",
+                        '--config', "configs/deeplabv3plus/deeplabv3plus_r50-d8_480x480_40k_LeafDataset_T2.py",
                         '--datapath', "data/LCCV",
+                        '--work-dir', 'outputs'
                        ])
 
 run = experiment.submit(config=src)
 run.wait_for_completion(show_output=True)
+
+best_run, fitted_model = run.get_output()

@@ -17,7 +17,7 @@ class LeafDataset(CustomDataset):
 
     CLASSES = ('background', 'leaf')
 
-    PALETTE = [[120, 120, 120], [6, 230, 230]]
+    PALETTE = [[0, 0, 0], [6, 230, 230]]
 
     def __init__(self, **kwargs):
         super(LeafDataset, self).__init__(
