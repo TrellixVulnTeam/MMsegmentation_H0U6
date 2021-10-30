@@ -1,3 +1,4 @@
-@REM docker build --tag mmplant6 --file docker/Dockerfile .
-docker run -w=/Users/samsung_/Hexafarms/Leaf_Area/ -it -v C:/Users/samsung_/Hexafarms/Leaf_Area/mmsegmentation/:/work mmplant6 sh ^
--c "pip install --no-cache-dir -e . ; python3 tools/test.py work_dirs/Hexa_Model/DeeplabV3_10k/deeplabv3plus_r50-d8_480x480_10k_LeafDataset.py work_dirs/Hexa_Model/DeeplabV3_10k/iter_10000.pth --show-dir work_dirs/deeplabv3plus_r50-d8_480x480_10k_LeafDataset"
+docker pull ccomkhj/mmplant6:v1
+docker run -it --rm -w=/Users/samsung_/Hexafarms/Leaf_Area/ -v C:/Users/samsung_/Hexafarms/Leaf_Area/:/work ccomkhj/mmplant6:v1 ^
+sh -c "pip install --no-cache-dir -e . ; python3 Hexafarm/predict.py work_dirs\deeplabv3plus_r50-d8_480x480_20k_LeafDataset_T3\deeplabv3plus_r50-d8_480x480_20k_LeafDataset_T3.py work_dirs\deeplabv3plus_r50-d8_480x480_20k_LeafDataset_T3\iter_20000.pth demo\image-1550434545.jpg --output output"
+
