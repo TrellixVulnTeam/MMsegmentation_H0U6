@@ -169,7 +169,7 @@ def main():
         workspace = Workspace(subscription_id="dfc1bdc8-c35c-4e7f-ae62-7e8553e4f353", resource_group="Hexa_resource", workspace_name="Hexafarms_Leaf", _cloud='AzureCloud')
         workspace.get_details()
 
-        dataset = Dataset.get_by_name(workspace, name='Leaf-Segmentation')
+        dataset = Dataset.get_by_name(workspace, name='Leaf-Segmentation2')
         run = Run.get_context()
         
         import os
