@@ -1,0 +1,2 @@
+python Hexafarm/predict.py work_dirs\deeplabv3plus_r50-d8_480x480_20k_LeafDataset_T3\deeplabv3plus_r50-d8_480x480_20k_LeafDataset_T3.py work_dirs\deeplabv3plus_r50-d8_480x480_20k_LeafDataset_T3\iter_20000.pth ^
+demo\image-1550434545.jpg --output output
