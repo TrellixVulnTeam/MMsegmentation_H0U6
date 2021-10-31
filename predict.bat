@@ -1,2 +1,3 @@
-python Hexafarm/predict.py work_dirs\deeplabv3plus_r50-d8_480x480_20k_LeafDataset_T3\deeplabv3plus_r50-d8_480x480_20k_LeafDataset_T3.py work_dirs\deeplabv3plus_r50-d8_480x480_20k_LeafDataset_T3\iter_20000.pth ^
+python Hexafarm/predict.py work_dirs\segformer_mit-b0_512x512_10k_LeafDataset\segformer_mit-b0_512x512_10k_LeafDataset.py ^
+work_dirs\segformer_mit-b0_512x512_10k_LeafDataset\iter_10000.pth ^
 demo\image-1550434545.jpg --output output

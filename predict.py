@@ -36,7 +36,6 @@ if __name__ == '__main__':
     # test a single image and show the results
     img = args.input #'demo\image-1550434545.jpg' #r'demo/Hexa plant 26.10.21.jpg'  # or img = mmcv.imread(img), which will only load it once
     result = inference_segmentor(model, img)
-    breakpoint()
     if not os.path.exists(args.output):
         os.mkdir(args.output)
     model.show_result(img, result, out_file=os.path.join(args.output,os.path.basename(args.input)), opacity=0.5)
