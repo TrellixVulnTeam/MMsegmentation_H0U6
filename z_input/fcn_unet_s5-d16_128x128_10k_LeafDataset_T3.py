@@ -49,7 +49,7 @@ model = dict(
         loss_decode=dict(
             type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4)),
     train_cfg=dict(),
-    test_cfg=dict(mode='slide', crop_size=(128, 128), stride=(85, 85)))
+    test_cfg=dict(mode='slide', crop_size=(128, 128), stride=(112, 112)))
 dataset_type = 'LeafDataset'
 data_root = 'data/LCCV'
 img_norm_cfg = dict(
@@ -87,7 +87,7 @@ test_pipeline = [
     dict(
         type='MultiScaleFlipAug',
         img_scale=None,
-        img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0],
+        img_ratios=[1.0],
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
@@ -102,7 +102,7 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=4,
+    samples_per_gpu=1,
     workers_per_gpu=4,
     train=dict(
         type='RepeatDataset',
@@ -172,7 +172,7 @@ data = dict(
             dict(
                 type='MultiScaleFlipAug',
                 img_scale=None,
-                img_ratios=[0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0],
+                img_ratios=[1.0],
                 flip=False,
                 transforms=[
                     dict(type='Resize', keep_ratio=True),
