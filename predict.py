@@ -20,7 +20,7 @@ def parse_args():
     args = parser.parse_args()
     return args
 
-def segment(config_file, checkpoint_file, file, device='cpu' ):
+def segment(config_file, checkpoint_file, *file, device='cpu' ):
     # build the model from a config file and a checkpoint file
     model = init_segmentor(config_file, checkpoint_file, device=device)
 
