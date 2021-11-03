@@ -20,7 +20,7 @@ def parse_args():
     args = parser.parse_args()
     return args
 
-def segment(config_file, checkpoint_file, file, device='cpu' ):
+def segment(config_file, checkpoint_file, *file, device='cpu' ):
     # build the model from a config file and a checkpoint file
     model = init_segmentor(config_file, checkpoint_file, device=device)
 
@@ -29,11 +29,11 @@ def segment(config_file, checkpoint_file, file, device='cpu' ):
         img = args.input #'demo\image-1550434545.jpg' #r'demo/Hexa plant 26.10.21.jpg'  # or img = mmcv.imread(img), which will only load it once
     else:
         img = os.path.abspath(file)
-    '''TODO: find way to feed images to the inference_segmentor.
-    '''
+ 
     result = inference_segmentor(model, img)
     if not os.path.exists(args.output):
         os.mkdir(args.output)
+        
     model.show_result(img, result, out_file=os.path.join(args.output,os.path.basename(args.input)), opacity=0.5)
     return result
 
