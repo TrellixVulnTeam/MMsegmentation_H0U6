@@ -1,7 +1,8 @@
 <div align="center">
-  <img src="resources/mmseg-logo.png" width="600"/>
+  <img src="resources/LOGO_wide.png" width="600"/>
 </div>
 <br />
+
 
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mmsegmentation)](https://pypi.org/project/mmsegmentation/)
 [![PyPI](https://img.shields.io/pypi/v/mmsegmentation)](https://pypi.org/project/mmsegmentation)
@@ -12,18 +13,40 @@
 [![issue resolution](https://isitmaintained.com/badge/resolution/open-mmlab/mmsegmentation.svg)](https://github.com/open-mmlab/mmsegmentation/issues)
 [![open issues](https://isitmaintained.com/badge/open/open-mmlab/mmsegmentation.svg)](https://github.com/open-mmlab/mmsegmentation/issues)
 
-Documentation: https://mmsegmentation.readthedocs.io/
+
+## About Hexafarms
+
+Hexafarm provides A-Z solutions for indoor farming industries.<br />
+MMSegmentation has been used as a base network to segment leaves.<br />
+This segmented leaves are used to track the growth of plants.<br />
+If you are interested, contact to huijo.k@hexafarms.com
+
+## What is special in Hexafarms'github ?
+
+- **AzureML friendly**
+
+You can use AzureML with MMsegmentaiton
+
+- **Plant leaves Customdataset Config**
+
+Customdataset config is updated for 0: background, 1: leaf
+
+<div align="center">
+  <img src="output/Hexa_image.jpeg" width="600"/>
+  <img src="output/Hexa_top.jpg" width="340"/>
+</div>
+
+## About MMSegmentation
+
+Documentationof MMsegmentation: https://mmsegmentation.readthedocs.io/
 
 English | [简体中文](README_zh-CN.md)
-
-## Introduction
 
 MMSegmentation is an open source semantic segmentation toolbox based on PyTorch.
 It is a part of the OpenMMLab project.
 
 The master branch works with **PyTorch 1.3+**.
 
-![demo image](resources/seg_demo.gif)
 
 ### Major features
 
@@ -47,74 +70,6 @@ The master branch works with **PyTorch 1.3+**.
 
 This project is released under the [Apache 2.0 license](LICENSE).
 
-## Changelog
-
-v0.18.0 was released in 10/07/2021.
-Please refer to [changelog.md](docs/changelog.md) for details and release history.
-
-## Benchmark and model zoo
-
-Results and models are available in the [model zoo](docs/model_zoo.md).
-
-Supported backbones:
-
-- [x] ResNet (CVPR'2016)
-- [x] ResNeXt (CVPR'2017)
-- [x] [HRNet (CVPR'2019)](configs/hrnet)
-- [x] [ResNeSt (ArXiv'2020)](configs/resnest)
-- [x] [MobileNetV2 (CVPR'2018)](configs/mobilenet_v2)
-- [x] [MobileNetV3 (ICCV'2019)](configs/mobilenet_v3)
-- [x] [Vision Transformer (ICLR'2021)](configs/vit)
-- [x] [Swin Transformer (ArXiv'2021)](configs/swin)
-
-Supported methods:
-
-- [x] [FCN (CVPR'2015/TPAMI'2017)](configs/fcn)
-- [x] [UNet (MICCAI'2016/Nat. Methods'2019)](configs/unet)
-- [x] [PSPNet (CVPR'2017)](configs/pspnet)
-- [x] [DeepLabV3 (ArXiv'2017)](configs/deeplabv3)
-- [x] [Mixed Precision (FP16) Training (ArXiv'2017)](configs/fp16)
-- [x] [BiSeNetV1 (ECCV'2018)](configs/bisenetv1)
-- [x] [PSANet (ECCV'2018)](configs/psanet)
-- [x] [DeepLabV3+ (CVPR'2018)](configs/deeplabv3plus)
-- [x] [UPerNet (ECCV'2018)](configs/upernet)
-- [x] [ICNet (ECCV'2018)](configs/icnet)
-- [x] [NonLocal Net (CVPR'2018)](configs/nonlocal_net)
-- [x] [EncNet (CVPR'2018)](configs/encnet)
-- [x] [Semantic FPN (CVPR'2019)](configs/sem_fpn)
-- [x] [DANet (CVPR'2019)](configs/danet)
-- [x] [APCNet (CVPR'2019)](configs/apcnet)
-- [x] [EMANet (ICCV'2019)](configs/emanet)
-- [x] [CCNet (ICCV'2019)](configs/ccnet)
-- [x] [DMNet (ICCV'2019)](configs/dmnet)
-- [x] [ANN (ICCV'2019)](configs/ann)
-- [x] [GCNet (ICCVW'2019/TPAMI'2020)](configs/gcnet)
-- [x] [FastFCN (ArXiv'2019)](configs/fastfcn)
-- [x] [Fast-SCNN (ArXiv'2019)](configs/fastscnn)
-- [x] [ISANet (ArXiv'2019/IJCV'2021)](configs/isanet)
-- [x] [OCRNet (ECCV'2020)](configs/ocrnet)
-- [x] [DNLNet (ECCV'2020)](configs/dnlnet)
-- [x] [PointRend (CVPR'2020)](configs/point_rend)
-- [x] [CGNet (TIP'2020)](configs/cgnet)
-- [x] [BiSeNetV2 (IJCV'2021)](configs/bisenetv2)
-- [x] [SETR (CVPR'2021)](configs/setr)
-- [x] [DPT (ArXiv'2021)](configs/dpt)
-- [x] [SegFormer (ArXiv'2021)](configs/segformer)
-
-Supported datasets:
-
-- [x] [Cityscapes](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/dataset_prepare.md#cityscapes)
-- [x] [PASCAL VOC](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/dataset_prepare.md#pascal-voc)
-- [x] [ADE20K](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/dataset_prepare.md#ade20k)
-- [x] [Pascal Context](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/dataset_prepare.md#pascal-context)
-- [x] [COCO-Stuff 10k](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/dataset_prepare.md#coco-stuff-10k)
-- [x] [COCO-Stuff 164k](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/dataset_prepare.md#coco-stuff-164k)
-- [x] [CHASE_DB1](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/dataset_prepare.md#chase-db1)
-- [x] [DRIVE](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/dataset_prepare.md#drive)
-- [x] [HRF](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/dataset_prepare.md#hrf)
-- [x] [STARE](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/dataset_prepare.md#stare)
-- [x] [Dark Zurich](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/dataset_prepare.md#dark-zurich)
-- [x] [Nighttime Driving](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/dataset_prepare.md#nighttime-driving)
 
 ## Installation
 
