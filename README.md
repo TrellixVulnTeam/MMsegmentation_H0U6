@@ -32,8 +32,8 @@ You can use AzureML with MMsegmentaiton
 Customdataset config is updated for 0: background, 1: leaf
 
 <div align="center">
-  <img src="output/Hexa_image.jpeg" width="600"/>
-  <img src="output/Hexa_top.jpg" width="340"/>
+  <img src="output/Hexa_image.jpeg" width="300"/>
+  <img src="output/Hexa_top.jpg" width="170"/>
 </div>
 
 ## About MMSegmentation
