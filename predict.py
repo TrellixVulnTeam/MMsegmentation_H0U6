@@ -23,12 +23,14 @@ def parse_args():
 def segment(config_file, checkpoint_file, *file, device='cpu' ):
     # build the model from a config file and a checkpoint file
     model = init_segmentor(config_file, checkpoint_file, device=device)
+    breakpoint()
+    img = mmcv.imread(args.input)
 
     # test a single image and show the results
-    if args.input:
-        img = args.input #'demo\image-1550434545.jpg' #r'demo/Hexa plant 26.10.21.jpg'  # or img = mmcv.imread(img), which will only load it once
-    else:
-        img = os.path.abspath(file)
+    # if args.input:
+    #     img = args.input #'demo\image-1550434545.jpg' #r'demo/Hexa plant 26.10.21.jpg'  # or img = mmcv.imread(img), which will only load it once
+    # else:
+    #     img = os.path.abspath(file)
  
     result = inference_segmentor(model, img)
     if not os.path.exists(args.output):
