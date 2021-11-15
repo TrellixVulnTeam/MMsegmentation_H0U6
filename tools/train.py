@@ -21,7 +21,7 @@ from mmseg.utils import collect_env, get_root_logger
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a segmentor')
-    parser.add_argument('config', help='train config file path')
+    parser.add_argument('--config', help='train config file path', default="configs/deeplabv3/deeplabv3_r50-d8_480x480_1k_LeafDataset.py")
     parser.add_argument('--work-dir', help='the dir to save logs and models')
     parser.add_argument(
         '--load-from', help='the checkpoint file to load weights from')
@@ -56,6 +56,17 @@ def parse_args():
         default='none',
         help='job launcher')
     parser.add_argument('--local_rank', type=int, default=0)
+
+    parser.add_argument(
+        '--datapath',
+        type=str,
+        default=None,
+        help='Path to the training data'
+    )
+    
+
+
+
     args = parser.parse_args()
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)
@@ -139,6 +150,7 @@ def main():
         test_cfg=cfg.get('test_cfg'))
     model.init_weights()
 
+
     # SyncBN is not support for DP
     if not distributed:
         warnings.warn(
@@ -148,6 +160,25 @@ def main():
         model = revert_sync_batchnorm(model)
 
     logger.info(model)
+
+
+    if args.datapath != None: # needs to be changed.
+        from azureml.core import Workspace, Run, Dataset
+
+        # The download location can also be retrieved from input_datasets of the run context.
+        workspace = Workspace(subscription_id="dfc1bdc8-c35c-4e7f-ae62-7e8553e4f353", resource_group="Hexa_resource", workspace_name="Hexafarms_Leaf", _cloud='AzureCloud')
+        workspace.get_details()
+
+        dataset = Dataset.get_by_name(workspace, name='Leaf-Segmentation2')
+        run = Run.get_context()
+        
+        import os
+        script_folder = os.path.join ( os.getcwd(), args.datapath )
+        os.makedirs( script_folder, exist_ok=True)
+
+        dataset.download(args.datapath)
+        # dataset.mount(args.data_path)
+        run.log('path', script_folder)
 
     datasets = [build_dataset(cfg.data.train)]
     if len(cfg.workflow) == 2:

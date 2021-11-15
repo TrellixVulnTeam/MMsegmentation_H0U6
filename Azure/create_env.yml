@@ -1,0 +1,5 @@
+$schema: https://azuremlschemas.azureedge.net/latest/environment.schema.json
+name: fastai
+version: 1
+docker:
+  image: docker.io/fastai/fastai
