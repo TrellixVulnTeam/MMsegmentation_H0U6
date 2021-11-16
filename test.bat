@@ -1,1 +1,0 @@
-python tools/test.py work_dirs\Hexa_Model\DeeplabV3_10k\deeplabv3plus_r50-d8_480x480_10k_LeafDataset.py work_dirs\Hexa_Model\DeeplabV3_10k\iter_10000.pth --show-dir work_dirs\deeplabv3plus_r50-d8_480x480_10k_LeafDataset
