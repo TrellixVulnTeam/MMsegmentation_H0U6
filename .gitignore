@@ -103,11 +103,16 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+z_input
+Azure
+outputs
 data
 .vscode
 .idea
 
 # custom
+*.bat
+*.sh
 *.pkl
 *.pkl.json
 *.log.json
