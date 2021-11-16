@@ -1,3 +1,6 @@
+from fastapi.datastructures import UploadFile
+from starlette.responses import FileResponse
+from torch.cuda import check_error
 from mmseg.apis import inference_segmentor, init_segmentor
 import mmcv
 import argparse
@@ -24,24 +27,14 @@ def parse_args():
     args = parser.parse_args()
     return args
 
-def segment(config_file, checkpoint_file, *file, device='cuda:0' ):
+def segment(config_file, checkpoint_file, input_dir, output_dir, device='cuda:0' ):
     # build the model from a config file and a checkpoint file
     model = init_segmentor(config_file, checkpoint_file, device=device)
-    img = mmcv.imread(args.input)
-
-    # test a single image and show the results
-    # if args.input:
-    #     img = args.input #'demo\image-1550434545.jpg' #r'demo/Hexa plant 26.10.21.jpg'  # or img = mmcv.imread(img), which will only load it once
-    # else:
-    #     img = os.path.abspath(file)
+    img = mmcv.imread(input_dir)
  
     result = inference_segmentor(model, img)
 
-    if args.save:
-        if not os.path.exists(args.output):
-            os.mkdir(args.output)
-
-        model.show_result(img, result, out_file=os.path.join(args.output, os.path.basename(args.input)), opacity=0.5)
+    model.show_result(img, result, out_file=os.path.join(output_dir, os.path.basename(input_dir)), opacity=0.5)
     return result
 
 def segment_api(config_file, checkpoint_file, img):
@@ -50,17 +43,29 @@ def segment_api(config_file, checkpoint_file, img):
     return result
     
 
-'''
-Current docker is made only for MMsegmentaiton.
-But it should be able to cover fastapi, too.
-'''
+from fastapi.responses import FileResponse, StreamingResponse
+from fastapi import FastAPI, UploadFile, File
+import numpy as np
+app = FastAPI()
 
-if __name__ == '__main__':
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 
-    args = parse_args()
-    config_file = args.config
-    checkpoint_file = args.weight
-    segment(config_file, checkpoint_file)
+@app.post("/segment")
+async def create_upload_file(file: UploadFile = File(...)):
+    file_location = f"fastapi-files/{file.filename}"
+    with open(file_location, "wb+") as file_object:
+        file_object.write(file.file.read())
 
+
+    config_file = "../z_input/fcn_unet_s5-d16_128x128_10k_LeafDataset_T3.py"
+    checkpoint_file = "../z_input/iter_10000.pth"
+    input_dir = f"fastapi-files/{file.filename}"
+    output_dir = "fastapi-files/"
+
+    segment(config_file, checkpoint_file, input_dir, output_dir) 
+    image = open(f"fastapi-files/{file.filename}", 'rb')
+
+    return StreamingResponse(image, media_type="image/jpeg")
     
-
