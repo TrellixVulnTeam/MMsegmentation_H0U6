@@ -32,15 +32,13 @@ You can use AzureML with MMsegmentaiton
 Customdataset config is updated for 0: background, 1: leaf
 
 <div align="center">
-  <img src="output/Hexa_image.jpeg" width="300"/>
-  <img src="output/Hexa_top.jpg" width="170"/>
+  <img src="demo/Hexa_image.jpeg" width="300"/>
+  <img src="demo/Hexa_top.jpg" width="170"/>
 </div>
 
 ## About MMSegmentation
 
 Documentationof MMsegmentation: https://mmsegmentation.readthedocs.io/
-
-English | [简体中文](README_zh-CN.md)
 
 MMSegmentation is an open source semantic segmentation toolbox based on PyTorch.
 It is a part of the OpenMMLab project.
