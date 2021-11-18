@@ -121,3 +121,7 @@ mmseg/.mim
 
 # Pytorch
 *.pth
+
+# images
+*.jpg
+*.png
