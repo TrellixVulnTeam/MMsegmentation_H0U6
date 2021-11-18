@@ -21,7 +21,7 @@ from mmseg.utils import collect_env, get_root_logger
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a segmentor')
-    parser.add_argument('--config', help='train config file path', default="configs/deeplabv3/deeplabv3_r50-d8_480x480_1k_LeafDataset.py")
+    parser.add_argument('config', help='train config file path', default="configs/deeplabv3/deeplabv3_r50-d8_480x480_1k_LeafDataset.py")
     parser.add_argument('--work-dir', help='the dir to save logs and models')
     parser.add_argument(
         '--load-from', help='the checkpoint file to load weights from')
@@ -208,4 +208,6 @@ def main():
 
 
 if __name__ == '__main__':
+    import torch
+    torch.cuda.empty_cache()
     main()

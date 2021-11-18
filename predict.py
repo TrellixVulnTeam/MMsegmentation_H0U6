@@ -44,11 +44,6 @@ def segment(config_file, checkpoint_file, *file, device='cuda:0' ):
         model.show_result(img, result, out_file=os.path.join(args.output, os.path.basename(args.input)), opacity=0.5)
     return result
 
-def segment_api(config_file, checkpoint_file, img):
-    model = init_segmentor(config_file, checkpoint_file, device='cpu')
-    result = inference_segmentor(model, img)
-    return result
-    
 
 '''
 Current docker is made only for MMsegmentaiton.
