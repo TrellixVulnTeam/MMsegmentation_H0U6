@@ -1,23 +1,12 @@
-from mmseg.apis import inference_segmentor, init_segmentor
-import mmcv
-import os
 from fastapi.responses import StreamingResponse
 from fastapi import FastAPI, UploadFile, File
-import torch
-
-def segment(config_file, checkpoint_file, input_dir, output_dir, device='cuda:0' ):
-    # build the model from a config file and a checkpoint file
-    model = init_segmentor(config_file, checkpoint_file, device=device)
-    img = mmcv.imread(input_dir)
-    result = inference_segmentor(model, img)
-    model.show_result(img, result, out_file=os.path.join(output_dir, os.path.basename(input_dir)), opacity=0.5)
-    return result
+from predict import segment_api as segment
 
 app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"Hexa": "Farm"}
 
 @app.post("/segment")
 async def create_upload_file(file: UploadFile = File(...)):
@@ -33,9 +22,8 @@ async def create_upload_file(file: UploadFile = File(...)):
 
     input_dir = f"fast_api/input/{file.filename}"
     output_dir = "fast_api/output/"
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    segment(config_file, checkpoint_file, input_dir, output_dir, device) 
+    segment(config_file, checkpoint_file, input_dir, output_dir) 
     image = open(output_dir+f"/{file.filename}", 'rb')
 
     return StreamingResponse(image, media_type=("image/jpeg"or"image/png"))
