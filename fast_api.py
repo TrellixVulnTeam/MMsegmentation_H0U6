@@ -17,7 +17,7 @@ async def create_upload_file(file: UploadFile = File(...)):
 
     ############################ Current Best Model ###############################
     config_file = "/weights/v0/config.py"
-    checkpoint_file = "/weights/v0/weights.py"
+    checkpoint_file = "/weights/v0/weights.pth"
     ################################################################################
 
     input_dir = f"fast_api/input/{file.filename}"
