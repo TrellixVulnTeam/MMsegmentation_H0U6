@@ -16,8 +16,8 @@ async def create_upload_file(file: UploadFile = File(...)):
         file_object.write(file.file.read())
 
     ############################ Current Best Model ###############################
-    config_file = "fast_api/best_model/fcn_unet_s5-d16_128x128_10k_LeafDataset_T3.py"
-    checkpoint_file = "fast_api/best_model/iter_10000.pth"
+    config_file = "/weights/v0/config.py"
+    checkpoint_file = "/weights/v0/weights.py"
     ################################################################################
 
     input_dir = f"fast_api/input/{file.filename}"
