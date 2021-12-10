@@ -15,7 +15,7 @@ def parse_args():
                         help="pretrained weight file in pth form."),
     parser.add_argument("input",
                         help="Specify the input image location."),
-    parser.add_argument("--output", default='None',
+    parser.add_argument("--output", default='outputs',
                         help="Specify the folder location to save segmentation.")
     parser.add_argument("--save",
                         action='store_true',
