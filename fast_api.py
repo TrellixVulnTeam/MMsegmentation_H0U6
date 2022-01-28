@@ -6,7 +6,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"Hexa": "Farm"}
+    return {"Hexa Farms'": "MMsegmentation"}
 
 @app.post("/segment")
 async def create_upload_file(file: UploadFile = File(...)):
@@ -27,4 +27,6 @@ async def create_upload_file(file: UploadFile = File(...)):
     image = open(output_dir+f"/{file.filename}", 'rb')
 
     return StreamingResponse(image, media_type=("image/jpeg"or"image/png"))
+
+# TODO: Implement area and mass estimate regression model.
     
