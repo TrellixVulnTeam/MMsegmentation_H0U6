@@ -39,9 +39,14 @@ Customdataset config is updated for 0: background, 1: leaf
   <img src="demo/Hexa_top.jpg" width="170"/>
 </div>
 
-- **Supports Conversion to YOLO dataset using segmentation model**
+- **Supports Conversion to YOLO dataset using segmentation model**  \
 `gen_mask.py {config file} {weight file} {input image directory}`
 
+  \
+  \
+  \
+  \
+<br> 
 ## About MMSegmentation
 
 Documentationof MMsegmentation: https://mmsegmentation.readthedocs.io/
