@@ -5,6 +5,7 @@ import os
 import torch
 
 
+
 def parse_args():
     '''Parse input arguments'''
     parser = argparse.ArgumentParser(
@@ -20,6 +21,9 @@ def parse_args():
     parser.add_argument("--save",
                         action='store_true',
                         help='whether to save output result files')
+    parser.add_argument("--binary",
+                        action='store_true',
+                        help='whether to save output in binary form')
 
 
     args = parser.parse_args()
@@ -35,7 +39,13 @@ def segment(config_file, checkpoint_file, *file, device='cuda:0' ):
         if not os.path.exists(args.output):
             os.mkdir(args.output)
 
-        model.show_result(img, result, out_file=os.path.join(args.output, os.path.basename(args.input)), opacity=0.5)
+        if args.binary:
+            mmcv.imwrite(result[0], os.path.join(args.output, os.path.basename(args.input)))
+            print('Saved at ', os.path.join(args.output, os.path.basename(args.input)))
+            return result
+        else:
+            model.show_result(img, result, out_file=os.path.join(args.output, os.path.basename(args.input)), opacity=0.5)
+        print('Saved at ', os.path.join(args.output, os.path.basename(args.input)))
     return result
 
 def segment_api(config_file, checkpoint_file, input_dir, output_dir, device='cuda:0' ):
