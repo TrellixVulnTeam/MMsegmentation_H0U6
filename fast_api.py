@@ -6,7 +6,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"Hexa Farms'": "MMsegmentation"}
+    return {"Hexa Farms'": "MMsegmentation V2"}
 
 @app.post("/segment")
 async def create_upload_file(file: UploadFile = File(...)):
