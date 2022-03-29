@@ -40,8 +40,10 @@ Customdataset config is updated for 0: background, 1: leaf
 </div>
 
 - **Supports Conversion to YOLO dataset using segmentation model**  \
-`gen_mask.py {config file} {weight file} {input image directory}`
-
+`gen_mask.py {config file} {weight file} {input image directory}` \
+You can simply decide by checking the quality of segmentation. \
+Press 'space bar' to keep the segmentation and convert to yolo format \
+Press 'esc' to skip the segmentation.
   \
   \
   \

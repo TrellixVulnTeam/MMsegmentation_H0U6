@@ -152,7 +152,7 @@ if __name__ == '__main__':
                 logger.info(f"{img_file} is saved at {args.output}")
                 mmcv.imwrite(mask, os.path.join(args.output,os.path.basename(img_file)))
             i += 1
-            toYolo(mask, os.path.join(args.output,os.path.basename(img_file)) )
+            toYolo(mask, os.path.join(args.output,img_file.stem ))
 
             cv2.destroyAllWindows()
             pass
